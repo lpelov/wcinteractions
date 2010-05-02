@@ -1,6 +1,6 @@
 #WCIGwtStartUpPortlet project installation.
 
-= Introduction =
+= Under Construction =
 
 Add your content here.
 
