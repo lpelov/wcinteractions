@@ -18,6 +18,14 @@ public class RegisteringServiceImpl extends RemoteServiceServlet implements Regi
 			throw new IllegalArgumentException("Name must be at least 4 characters long");
 		}
 
+		// just sleep for 3 sec to test the timeout exception
+		try {
+			Thread.sleep(3000);
+		}
+		catch (InterruptedException e) {
+			System.err.println(e.getMessage());
+		}
+
 		String serverInfo = getServletContext().getServerInfo();
 		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
 		return "Hello, " + input + "!<br><br>I am running " + serverInfo
