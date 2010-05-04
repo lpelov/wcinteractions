@@ -14,9 +14,10 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
  */
 public class AsyncCall {
 
+	private static int MAX_TIMEOUT = 30000; // in milisec
 	private static RegisteringServiceAsync service = null;
 	private static String moduleURL = null;
-	private static String portletID = "$$PORTLET_ID$$"; 
+	private static String portletID = "$$PORTLET_ID$$";
 
 	public AsyncCall() {
 		initializeService();
@@ -26,7 +27,7 @@ public class AsyncCall {
 		portletID = id;
 		initializeService();
 	}
-	
+
 	public static String getModuleURL() {
 		return moduleURL;
 	}
@@ -36,81 +37,50 @@ public class AsyncCall {
 	}
 
 	/**
-	 * Get the GWT Gatewayed Serivce URL
+	 * Get the url from the dictionary 
+	 * @return
 	 */
-//	private static native String getGatewayedServiceURL()
-//	/*-{		
-//		if ($wnd.initPortletServiceURL){
-//			return $wnd.initPortletServiceURL();
-//		}
-//		
-//		//if ($wnd.serviceURL$$PORTLET_ID$$) {
-//		//	return $wnd.serviceURL$$PORTLET_ID$$;
-//		//}		
-//		return null;
-//	}-*/;
-
 	private static String getGatewayedServiceURL() {
 		String serviceid = "serviceURL" + portletID;
-		//Window.alert("ServiceID: " + serviceid);
 		Dictionary theme = Dictionary.getDictionary(serviceid);
 		String url = theme.get("gatewayPrefixURL");
-
-		return url;		
+		return url;
 	}
-	
+
 	/**
 	 * Easy way to init GWT service URL.
 	 */
 	private static void initializeService() {
-
+		
+		RpcRequestBuilder theBuilder = new TimeOutRpcRequestBuilder();
+		
 		service = (RegisteringServiceAsync) GWT.create(RegisteringService.class);
 		final ServiceDefTarget endpoint = (ServiceDefTarget) service;
 
 		final String moduleURL;
-		//Window.alert("ServiceURL: " + getGatewayedServiceURL());
-		
+
 		if (getGatewayedServiceURL() == null || getGatewayedServiceURL().length() == 0) {
 			moduleURL = GWT.getModuleBaseURL() + "registering";
 		}
 		else {
 			moduleURL = getGatewayedServiceURL();
 		}
-		
+
 		endpoint.setServiceEntryPoint(moduleURL);
-		
-//		RpcRequestBuilder builder = new RpcRequestBuilder();
-//		builder.create(moduleURL);
-//		builder.finish().setTimeoutMillis(1);
-//		endpoint.setRpcRequestBuilder(builder);
-		
-/*
- *                 RequestBuilder rb = serviceAsync.getServerInfo(input, new
-AsyncCallback<String>() {
-                        @Override
-                        public void onSuccess(String result) {
-                        }
-                        @Override
-                        public void onFailure(Throwable caught) {
-                        }
-                });
-                rb.setTimeoutMillis(6000);
-                try {
-                        rb.send();
-                } catch (RequestException e) {
-                } 		
- */
+		endpoint.setRpcRequestBuilder(theBuilder);
 	}
 
-	public class MyRpcRequestBuilder extends RpcRequestBuilder {
-		
+	/**
+	 * Set up max time out for the RPC Request
+	 * @author L.Pelov, 04.05.2010
+	 */
+	public static class TimeOutRpcRequestBuilder extends RpcRequestBuilder {
 		@Override
 		protected RequestBuilder doCreate(String serviceEntryPoint) {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, serviceEntryPoint);
-			builder.setTimeoutMillis(1000); // in milisecounds
+			builder.setTimeoutMillis(MAX_TIMEOUT); // in milisecounds
 			return builder;
 		}
 
 	}
-
 }
