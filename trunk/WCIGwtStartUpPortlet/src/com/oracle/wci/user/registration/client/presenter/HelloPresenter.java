@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.http.client.RequestTimeoutException;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
@@ -52,9 +53,10 @@ public class HelloPresenter implements Presenter{
 		
 		display.getSendButton().addClickHandler(new ClickHandler() {			
 			public void onClick(ClickEvent event) {
-				if (display.getValidator().validate()) {
+				//TODO: Implement validator
+				//if (display.getValidator().validate()) {
 					sendNameToServer();
-				}				
+				//}				
 			}
 		});		
 	}
@@ -71,11 +73,6 @@ public class HelloPresenter implements Presenter{
 	
 	private void sendNameToServer() {
 		
-		// First, we validate the input.
-//		if (!FieldVerifier.isValidName(display.getTextBox().getText())) {
-//			return;
-//		}
-
 		rpcService.greetServer(display.getTextBox().getText(), new AsyncCallback<String>() {
 			
 			public void onSuccess(String result) {
@@ -83,12 +80,29 @@ public class HelloPresenter implements Presenter{
 			}
 			
 			public void onFailure(Throwable caught) {
-				Window.alert("Error" + caught.getMessage());
+				Window.alert(onError(caught));
 			}
 		});
 		
-		// Then, we send the input to the server.
-		//display.getSendButton().setEnabled(false);
 	}
 
+	/**
+	 * Error handler
+	 * @param caught
+	 * @return
+	 */
+	private String onError(Throwable caught) {
+		String msg;
+
+		// in case of timeout exception
+		if (caught instanceof RequestTimeoutException) {
+			msg = ((RequestTimeoutException) caught).getMessage();
+		}
+		else {
+			msg = caught.getMessage();
+		}
+
+		return msg;
+	}
+	
 }
