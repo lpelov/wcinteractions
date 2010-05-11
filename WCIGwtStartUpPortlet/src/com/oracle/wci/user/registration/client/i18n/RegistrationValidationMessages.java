@@ -7,7 +7,7 @@ import eu.maydu.gwt.validation.client.i18n.utils.MessageInterpolator;
 /**
  * Internationalize the error validator messages.
  * 
- * @author L.Pelov, Oracle
+ * @author L.Pelov
  */
 public class RegistrationValidationMessages extends ValidationMessages {
 

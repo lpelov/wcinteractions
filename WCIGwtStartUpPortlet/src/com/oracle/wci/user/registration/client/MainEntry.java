@@ -5,6 +5,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 
+/**
+ * Main Entry
+ * @author L.Pelov, 11.05.2010
+ */
 public abstract class MainEntry implements EntryPoint {
 
 	/**

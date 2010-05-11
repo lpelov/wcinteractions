@@ -19,9 +19,9 @@ import eu.maydu.gwt.validation.client.description.PopupDescription;
 import eu.maydu.gwt.validation.client.validators.numeric.IntegerValidator;
 
 /**
- * View class with vilidation, implements on MVP model.
+ * View class with validation, implements on MVP model.
  * 
- * @author L.Pelov, Oracle
+ * @author L.Pelov
  */
 public class HelloView extends Composite implements HelloPresenter.Display {
 
