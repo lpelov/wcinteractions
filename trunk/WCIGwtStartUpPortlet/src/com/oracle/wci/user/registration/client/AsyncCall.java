@@ -1,16 +1,21 @@
 package com.oracle.wci.user.registration.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestTimeoutException;
+import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.i18n.client.Dictionary;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.RpcRequestBuilder;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 /**
  * Implements the AsynCallBacks
  * 
- * @author L.Pelov, Oracle
- * 
+ * @author L.Pelov
  */
 public class AsyncCall {
 
@@ -36,10 +41,6 @@ public class AsyncCall {
 		return service;
 	}
 
-	/**
-	 * Get the url from the dictionary 
-	 * @return
-	 */
 	private static String getGatewayedServiceURL() {
 		String serviceid = "serviceURL" + portletID;
 		Dictionary theme = Dictionary.getDictionary(serviceid);
@@ -51,27 +52,32 @@ public class AsyncCall {
 	 * Easy way to init GWT service URL.
 	 */
 	private static void initializeService() {
-		
+
 		RpcRequestBuilder theBuilder = new TimeOutRpcRequestBuilder();
-		
+
 		service = (RegisteringServiceAsync) GWT.create(RegisteringService.class);
 		final ServiceDefTarget endpoint = (ServiceDefTarget) service;
 
-		final String moduleURL;
-
 		if (getGatewayedServiceURL() == null || getGatewayedServiceURL().length() == 0) {
-			moduleURL = GWT.getModuleBaseURL() + "registering";
+			if (GWT.isClient()) {
+				moduleURL = "";
+			}
+			else {
+				moduleURL = GWT.getModuleBaseURL();
+			}
+			endpoint.setServiceEntryPoint(GWT.getModuleBaseURL() + "registering");
 		}
 		else {
 			moduleURL = getGatewayedServiceURL();
+			endpoint.setServiceEntryPoint(getGatewayedServiceURL() + "registering");
 		}
-
-		endpoint.setServiceEntryPoint(moduleURL);
+		
 		endpoint.setRpcRequestBuilder(theBuilder);
 	}
 
 	/**
 	 * Set up max time out for the RPC Request
+	 * 
 	 * @author L.Pelov, 04.05.2010
 	 */
 	public static class TimeOutRpcRequestBuilder extends RpcRequestBuilder {
@@ -82,5 +88,76 @@ public class AsyncCall {
 			return builder;
 		}
 
+	}
+
+	/**
+	 * Entry interface use to build the query string.
+	 * 
+	 * @author L.Pelov, 10.05.2010
+	 */
+	public static interface Entry {
+		String getName();
+
+		String getValue();
+	}
+
+	/**
+	 * Build string query for POST or GET body.
+	 * 
+	 * @param queryEntries
+	 * @return
+	 */
+	public static String buildQueryString(Entry[] queryEntries) {
+		StringBuffer sb = new StringBuffer();
+
+		for (int i = 0, n = queryEntries.length; i < n; i++) {
+			Entry queryEntry = queryEntries[i];
+
+			if (i > 0) {
+				sb.append("&");
+			}
+
+			String encodeName = URL.encodeComponent(queryEntry.getName());
+			sb.append(encodeName);
+
+			sb.append("=");
+
+			String encodeValue = URL.encodeComponent(queryEntry.getValue());
+			sb.append(encodeValue);
+		}
+
+		return sb.toString();
+	}
+
+	/**
+	 * Do post information via AJAX call to the server.
+	 * @param url
+	 * @param requestData
+	 */
+	public static void doPost(String url, String requestData) {
+		RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
+
+		try {
+			builder.setTimeoutMillis(MAX_TIMEOUT);
+
+			// Request response = 
+			builder.sendRequest(requestData, new RequestCallback() {
+				public void onResponseReceived(Request request, Response response) {
+				}
+
+				public void onError(Request request, Throwable exception) {
+					if (exception instanceof RequestTimeoutException) {
+						Window.alert(((RequestTimeoutException) exception).getMessage());
+					}
+					else {
+						Window.alert(exception.getMessage());
+					}
+				}
+			});
+
+		}
+		catch (com.google.gwt.http.client.RequestException e) {
+			Window.alert("Unable to send the request: " + e.getMessage());
+		}
 	}
 }

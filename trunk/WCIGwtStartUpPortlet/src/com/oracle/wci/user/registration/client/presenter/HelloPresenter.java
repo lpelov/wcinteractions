@@ -4,7 +4,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.http.client.RequestTimeoutException;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
@@ -16,10 +15,9 @@ import eu.maydu.gwt.validation.client.ValidationProcessor;
 
 /**
  * Hello presenter to test the MVP GWT Framework
- * @author L.Pelov, Oracle
- *
+ * @author L.Pelov
  */
-public class HelloPresenter implements Presenter{
+public class HelloPresenter extends PresenterBase implements Presenter{
 
 	public interface Display {	
 		ValidationProcessor getValidator();
@@ -42,20 +40,13 @@ public class HelloPresenter implements Presenter{
 		this.display = view;		
 	}
 	
-	public void bind() {
-		// use to bind Display interface
-		// Example:
-		//		display.getDeleteButton().addClickHandler(new ClickHandler() {
-		//			public void onClick(ClickEvent event) {
-		//				deleteSelectedContacts();
-		//			}
-		//		});
-		
+	public void bind() {		
 		display.getSendButton().addClickHandler(new ClickHandler() {			
 			public void onClick(ClickEvent event) {
 				//TODO: Implement validator
 				//if (display.getValidator().validate()) {
 					sendNameToServer();
+					// eventBus.fireEvent(new LoadEvent("reinvite"));
 				//}				
 			}
 		});		
@@ -84,25 +75,5 @@ public class HelloPresenter implements Presenter{
 			}
 		});
 		
-	}
-
-	/**
-	 * Error handler
-	 * @param caught
-	 * @return
-	 */
-	private String onError(Throwable caught) {
-		String msg;
-
-		// in case of timeout exception
-		if (caught instanceof RequestTimeoutException) {
-			msg = ((RequestTimeoutException) caught).getMessage();
-		}
-		else {
-			msg = caught.getMessage();
-		}
-
-		return msg;
-	}
-	
+	}	
 }
