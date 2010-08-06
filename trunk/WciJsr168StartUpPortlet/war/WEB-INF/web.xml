@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>greetServlet</servlet-name>
+		<servlet-class>com.oracle.wci.portlet168.server.GreetingServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>greetServlet</servlet-name>
+		<url-pattern>/wcijsr168startupportlet/greet</url-pattern>
+	</servlet-mapping>
+
+	<!-- WCI JSR-168 Portlet Settings -->
+	<servlet>
+		<servlet-name>PortletServlet</servlet-name>
+		<servlet-class>com.plumtree.portlet.servlet.PortletServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ActionServlet</servlet-name>
+		<servlet-class>com.plumtree.portlet.servlet.ActionServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ErrorServlet</servlet-name>
+		<servlet-class>com.plumtree.portlet.servlet.ErrorServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PortletServlet</servlet-name>
+		<url-pattern>/portlet/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ActionServlet</servlet-name>
+		<url-pattern>/pt_action/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ActionServlet</servlet-name>
+		<url-pattern>/pt_render/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ErrorServlet</servlet-name>
+		<url-pattern>/pt_error/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>WciJsr168StartUpPortlet.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>
