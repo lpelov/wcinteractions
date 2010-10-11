@@ -25,15 +25,40 @@
 			if (typeof(PTPortlet) != "undefined") {
 				var currPortlet = PTPortlet.getPortletByID($$PORTLET_ID$$);				
 				if (currPortlet != null) {					
-					return currPortlet.gatewayPrefixURL + "wcigwtstartupportlet/registering" ;
+					return currPortlet.gatewayPrefixURL;
 				}
 			}
 			return "";
 		}
 	
+		//function initPortletServiceURL$$PORTLET_ID$$(){
+		//	if (typeof(PTPortlet) != "undefined") {
+		//		var currPortlet = PTPortlet.getPortletByID($$PORTLET_ID$$);				
+		//		if (currPortlet != null) {					
+		//			return currPortlet.gatewayPrefixURL + "wcigwtstartupportlet/registering" ;
+		//		}
+		//	}
+		//	return "";
+		//}
+	
+		//var serviceURL$$PORTLET_ID$$ = {
+		//	gatewayPrefixURL: initPortletServiceURL$$PORTLET_ID$$()
+		//};			
+
+		// DEV MODE - for local testings
 		var serviceURL$$PORTLET_ID$$ = {
-			gatewayPrefixURL: initPortletServiceURL$$PORTLET_ID$$()
-		};			
+			serviceName : "registering", 
+			portalGateway : initPortletServiceURL$$PORTLET_ID$$(),	
+			gatewayPrefixURL: initPortletServiceURL$$PORTLET_ID$$() + ""		
+		};
+
+		// PROD MODE - if you deploy on portal
+		//var serviceURL$$PORTLET_ID$$ = {
+		//	serviceName : "registering", 
+		//	portalGateway : initPortletServiceURL$$PORTLET_ID$$(),	
+		//	gatewayPrefixURL: initPortletServiceURL$$PORTLET_ID$$() + "wcigwtstartupportlet/"		
+		//};					
+							
 	</script>
     <!--                                           -->
     <!-- This script loads your compiled module.   -->
