@@ -35,7 +35,9 @@ public class AsyncCall {
 
 	private static int MAX_TIMEOUT = 30000; // in milisec
 	private static RegisteringServiceAsync service = null;
-	private static String moduleURL = null;
+	private static String moduleURL = "";
+	private static String gateway = "";
+	private static String servletServiceName = "";
 	private static String portletID = "$$PORTLET_ID$$";
 
 	public AsyncCall() {
@@ -51,6 +53,10 @@ public class AsyncCall {
 		return moduleURL;
 	}
 
+	public static String getGateway() {
+		return gateway;
+	}
+
 	public RegisteringServiceAsync getService() {
 		return service;
 	}
@@ -59,7 +65,9 @@ public class AsyncCall {
 		String serviceid = "serviceURL" + portletID;
 		Dictionary theme = Dictionary.getDictionary(serviceid);
 		String url = theme.get("gatewayPrefixURL");
-		return url;
+		gateway = theme.get("portalGateway");
+		servletServiceName = theme.get("serviceName");
+		return url;		
 	}
 
 	/**
@@ -71,21 +79,22 @@ public class AsyncCall {
 
 		service = (RegisteringServiceAsync) GWT.create(RegisteringService.class);
 		final ServiceDefTarget endpoint = (ServiceDefTarget) service;
+		String gatewayedServiceUrl = getGatewayedServiceURL(); 
 
-		if (getGatewayedServiceURL() == null || getGatewayedServiceURL().length() == 0) {
+		if (gatewayedServiceUrl == null || gatewayedServiceUrl.length() == 0) {
 			if (GWT.isClient()) {
 				moduleURL = "";
 			}
 			else {
 				moduleURL = GWT.getModuleBaseURL();
 			}
-			endpoint.setServiceEntryPoint(GWT.getModuleBaseURL() + "registering");
+			endpoint.setServiceEntryPoint(GWT.getModuleBaseURL() + servletServiceName);
 		}
 		else {
-			moduleURL = getGatewayedServiceURL();
-			endpoint.setServiceEntryPoint(getGatewayedServiceURL() + "registering");
+			moduleURL = gatewayedServiceUrl;
+			endpoint.setServiceEntryPoint(gatewayedServiceUrl + servletServiceName);
 		}
-		
+
 		endpoint.setRpcRequestBuilder(theBuilder);
 	}
 
@@ -97,7 +106,8 @@ public class AsyncCall {
 	public static class TimeOutRpcRequestBuilder extends RpcRequestBuilder {
 		@Override
 		protected RequestBuilder doCreate(String serviceEntryPoint) {
-			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, serviceEntryPoint);
+			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST,
+					serviceEntryPoint);
 			builder.setTimeoutMillis(MAX_TIMEOUT); // in milisecounds
 			return builder;
 		}
@@ -145,6 +155,7 @@ public class AsyncCall {
 
 	/**
 	 * Do post information via AJAX call to the server.
+	 * 
 	 * @param url
 	 * @param requestData
 	 */
@@ -154,14 +165,16 @@ public class AsyncCall {
 		try {
 			builder.setTimeoutMillis(MAX_TIMEOUT);
 
-			// Request response = 
+			// Request response =
 			builder.sendRequest(requestData, new RequestCallback() {
-				public void onResponseReceived(Request request, Response response) {
+				public void onResponseReceived(Request request,
+						Response response) {
 				}
 
 				public void onError(Request request, Throwable exception) {
 					if (exception instanceof RequestTimeoutException) {
-						Window.alert(((RequestTimeoutException) exception).getMessage());
+						Window.alert(((RequestTimeoutException) exception)
+								.getMessage());
 					}
 					else {
 						Window.alert(exception.getMessage());
