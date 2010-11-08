@@ -110,16 +110,13 @@ public class CellTableViewImpl extends Composite implements HasText,
 		// Add the CellList to the adapter in the database.
 		ContactDatabase.get().addDataDisplay(cellTable);
 
-		// Create the UiBinder.
-		// Binder uiBinder = GWT.create(Binder.class);
-		// Widget widget = uiBinder.createAndBindUi(this);
-
 		initWidget(uiBinder.createAndBindUi(this));
 		button.setText("Click me");
 	}
 
 	@UiHandler("button")
 	void onClick(ClickEvent e) {
+		// experiments to give back to the presenter
 		// Window.alert("Hello!");
 		// this.presenter.goTo(new HelloPlace("after table"));
 		presenter.onButtonClicked();
@@ -153,11 +150,9 @@ public class CellTableViewImpl extends Composite implements HasText,
 	 */
 	private void initTableColumns(
 			final SelectionModel<ContactInfo> selectionModel) {
-		// Checkbox column. This table will uses a checkbox column for
-		// selection.
+		// This table will uses a checkbox column for selection.
 		// Alternatively, you can call cellTable.setSelectionEnabled(true) to
-		// enable
-		// mouse selection.
+		// enable mouse selection.
 		Column<ContactInfo, Boolean> checkColumn = new Column<ContactInfo, Boolean>(
 				new CheckboxCell(true)) {
 			@Override
@@ -210,7 +205,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 					public String getValue(ContactInfo object) {
 						return object.getFirstName();
 					}
-				}, "Firstname");
+				});
 
 		// Last name.
 		Column<ContactInfo, String> lastNameColumn = new Column<ContactInfo, String>(
@@ -261,7 +256,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 					public String getValue(ContactInfo object) {
 						return object.getAddress();
 					}
-				}, "Address");
+				});
 
 		// cellTable.addColumn(new Column<ContactInfo, String>(new TextCell()) {
 		// @Override
@@ -297,12 +292,11 @@ public class CellTableViewImpl extends Composite implements HasText,
 	 *            the {@link GetValue} used to retrieve cell values
 	 * @return the new column
 	 */
-
 	private <C extends Comparable<C>> Column<ContactInfo, C> addColumn(
 			final String text, final Cell<C> cell,
-			final GetValue<ContactInfo, C> getter, final String property) {
+			final GetValue<ContactInfo, C> getter) {
 
-		return addColumn(text, cell, getter, property,
+		return addColumn(text, cell, getter,
 				createColumnComparator(getter, false),
 				createColumnComparator(getter, true));
 	}
@@ -320,13 +314,18 @@ public class CellTableViewImpl extends Composite implements HasText,
 	 *            the getter to retrieve the value for the column
 	 * @param property
 	 *            the property to sort by
+	 * @param ascComparator
+	 *            ascendent comparator
+	 * @param descComparator
+	 *            descendant comparator
 	 * @return the column
 	 */
 	private <C> Column<ContactInfo, C> addColumn(final String text,
 			final Cell<C> cell, final GetValue<ContactInfo, C> getter,
-			final String property, final Comparator<ContactInfo> ascComparator,
+			final Comparator<ContactInfo> ascComparator,
 			final Comparator<ContactInfo> descComparator) {
 
+		// gets the cell value
 		final Column<ContactInfo, C> column = new Column<ContactInfo, C>(cell) {
 			@Override
 			public C getValue(ContactInfo object) {
@@ -337,13 +336,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 		final SortableHeader header = new SortableHeader(text);
 		allHeaders.add(header);
 
-		// Sort created by default.
-		// if ("created".equals(property)) {
-		// header.setSorted(true);
-		// header.setReverseSort(true);
-		// orderBy = "created" + " DESC";
-		// }
-
+		// call this everytime headers is clicked
 		header.setUpdater(new ValueUpdater<String>() {
 			public void update(String value) {
 				header.setSorted(true);
@@ -356,37 +349,45 @@ public class CellTableViewImpl extends Composite implements HasText,
 					}
 				}
 
+				// sort the clicked column
 				sortExpenses(ContactDatabase.get().getDataProvider().getList(),
 						header.getReverseSort() ? descComparator
 								: ascComparator);
 
 				cellTable.redrawHeaders();
 
-				// Request sorted rows.
-				// orderBy = property;
-				// if (header.getReverseSort()) {
-				// orderBy += " DESC";
-				// }
-
-				// Go to the first page of the newly-sorted results
+				// Go to the first page of the newly-sorted results, if wished
 				// pager.firstPage();
-				// ContactDatabase.get().sort();
-
-				// Window.alert("sort here now");
 			}
 		});
 		cellTable.addColumn(column, header);
 		return column;
 	}
 
-	// private Comparator<ContactInfo> lastComparator;
-
+	/**
+	 * Proceed with the sorting operation
+	 * 
+	 * @param list
+	 *            data to sort
+	 * @param comparator
+	 *            the {@link Comparator} used for the sorting
+	 */
 	private void sortExpenses(List<ContactInfo> list,
 			final Comparator<ContactInfo> comparator) {
-		// lastComparator = comparator;
 		Collections.sort(list, comparator);
 	}
 
+	/**
+	 * Implements the comparator for our ContactInfo object.
+	 * 
+	 * @param <C>
+	 *            the data type from the column
+	 * @param getter
+	 *            the {@link GetValue} used to retrieve cell values
+	 * @param descending
+	 *            way of sorting
+	 * @return
+	 */
 	private <C extends Comparable<C>> Comparator<ContactInfo> createColumnComparator(
 			final GetValue<ContactInfo, C> getter, final boolean descending) {
 		return new Comparator<ContactInfo>() {
