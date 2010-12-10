@@ -366,6 +366,10 @@ public class ContactDatabase {
 	public void addDataDisplay(HasData<ContactInfo> display) {
 		dataProvider.addDataDisplay(display);
 	}
+	
+	public List<ContactInfo> getData() {
+		return dataProvider.getList();
+	}
 
 	/**
 	 * Generate the specified number of contacts and add them to the data
