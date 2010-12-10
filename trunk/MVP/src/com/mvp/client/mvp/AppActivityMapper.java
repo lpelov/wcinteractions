@@ -20,9 +20,11 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.mvp.client.ClientFactory;
 import com.mvp.client.activity.CellTableActivity;
+import com.mvp.client.activity.CellTableSortingActivity;
 import com.mvp.client.activity.GoodbyeActivity;
 import com.mvp.client.activity.HelloActivity;
 import com.mvp.client.place.CellTablePlace;
+import com.mvp.client.place.CellTableSortingPlace;
 import com.mvp.client.place.GoodbyePlace;
 import com.mvp.client.place.HelloPlace;
 
@@ -43,6 +45,9 @@ public class AppActivityMapper implements ActivityMapper {
 			return new GoodbyeActivity((GoodbyePlace) place, clientFactory);
 		else if (place instanceof CellTablePlace)
 			return new CellTableActivity((CellTablePlace) place, clientFactory);
+		else if (place instanceof CellTableSortingPlace)
+			return new CellTableSortingActivity((CellTableSortingPlace) place,
+					clientFactory);
 		return null;
 
 	}
