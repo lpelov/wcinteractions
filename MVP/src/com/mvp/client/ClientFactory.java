@@ -17,6 +17,7 @@ package com.mvp.client;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.PlaceController;
+import com.mvp.client.ui.CellTableSortingView;
 import com.mvp.client.ui.CellTableView;
 import com.mvp.client.ui.GoodbyeView;
 import com.mvp.client.ui.HelloView;
@@ -29,6 +30,8 @@ public interface ClientFactory {
 	HelloView getHelloView();
 
 	GoodbyeView getGoodbyeView();
-	
+
 	CellTableView getCellTableView();
+
+	CellTableSortingView getCellTableSortableView();
 }

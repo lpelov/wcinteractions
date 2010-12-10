@@ -34,7 +34,7 @@ import com.mvp.client.place.CellTablePlace;
  */
 public class MVP implements EntryPoint {
 
-	//private Place defaultPlace = new HelloPlace("my mvp place");
+	// private Place defaultPlace = new HelloPlace("my mvp place");
 	private Place defaultPlace = new CellTablePlace("lyudmil's cell table view");
 	private SimplePanel appWidget = new SimplePanel();
 
@@ -42,7 +42,7 @@ public class MVP implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		
+
 		ClientFactory clientFactory = GWT.create(ClientFactory.class);
 		EventBus eventBus = clientFactory.getEventBus();
 		PlaceController placeController = clientFactory.getPlaceController();
@@ -50,7 +50,7 @@ public class MVP implements EntryPoint {
 		// Start ActivityManager for the main widget with our ActivityMapper
 		ActivityMapper activityMapper = new AppActivityMapper(clientFactory);
 		ActivityManager activityManager = new ActivityManager(activityMapper,
-				eventBus);		
+				eventBus);
 		activityManager.setDisplay(appWidget);
 
 		// Start PlaceHistoryHandler with our PlaceHistoryMapper
@@ -61,7 +61,7 @@ public class MVP implements EntryPoint {
 		historyHandler.register(placeController, eventBus, defaultPlace);
 
 		RootPanel.get().add(appWidget);
-		
+
 		// Goes to the place represented on URL else default place
 		historyHandler.handleCurrentHistory();
 
