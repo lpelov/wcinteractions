@@ -22,7 +22,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.mvp.client.ClientFactory;
 import com.mvp.client.place.CellTablePlace;
-import com.mvp.client.place.HelloPlace;
+import com.mvp.client.place.CellTableSortingPlace;
 import com.mvp.client.ui.CellTableView;
 
 public class CellTableActivity extends AbstractActivity implements
@@ -34,20 +34,21 @@ public class CellTableActivity extends AbstractActivity implements
 
 	// Name that will be appended to "Hello,"
 	private String name;
-	private String somerpcdata = "no data";
-	
+
+	// private String somerpcdata = "no data";
+
 	public CellTableActivity(CellTablePlace place, ClientFactory clientFactory) {
 		this.name = place.getCellTableName();
 		this.clientFactory = clientFactory;
-		
-		Window.alert("Do RPC Call");
-		somerpcdata = "I've got the data";
+
+		// Window.alert("Do RPC Call Here");
+		// somerpcdata = "I've got the data";
 	}
-	
+
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
-		Window.alert(somerpcdata);
-		
+		// Window.alert(somerpcdata);
+
 		// you can use here every view you want
 		CellTableView cellTableView = clientFactory.getCellTableView();
 		cellTableView.setName(name);
@@ -56,14 +57,17 @@ public class CellTableActivity extends AbstractActivity implements
 	}
 
 	@Override
-	public void goTo(Place place) {		
+	public void goTo(Place place) {
 		clientFactory.getPlaceController().goTo(place);
 	}
 
 	@Override
 	public void onButtonClicked() {
 		Window.alert("This is now the activity here");
-		clientFactory.getPlaceController().goTo(new HelloPlace("after table"));
+		// clientFactory.getPlaceController().goTo(new
+		// HelloPlace("after table"));
+		clientFactory.getPlaceController().goTo(
+				new CellTableSortingPlace("sorting table"));
 	}
 
 }

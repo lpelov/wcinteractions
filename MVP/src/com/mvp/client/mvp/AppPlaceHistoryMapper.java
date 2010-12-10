@@ -18,11 +18,12 @@ package com.mvp.client.mvp;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
 import com.mvp.client.place.CellTablePlace;
+import com.mvp.client.place.CellTableSortingPlace;
 import com.mvp.client.place.GoodbyePlace;
 import com.mvp.client.place.HelloPlace;
 
 @WithTokenizers({ CellTablePlace.Tokenizer.class, HelloPlace.Tokenizer.class,
-		GoodbyePlace.Tokenizer.class })
+		GoodbyePlace.Tokenizer.class, CellTableSortingPlace.Tokenizer.class })
 public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 
 	/*
