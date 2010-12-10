@@ -18,7 +18,6 @@ package com.mvp.client.activity;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.mvp.client.ClientFactory;
 import com.mvp.client.place.CellTablePlace;
@@ -63,7 +62,7 @@ public class CellTableActivity extends AbstractActivity implements
 
 	@Override
 	public void onButtonClicked() {
-		Window.alert("This is now the activity here");
+		// Window.alert("This is now the activity here");
 		// clientFactory.getPlaceController().goTo(new
 		// HelloPlace("after table"));
 		clientFactory.getPlaceController().goTo(

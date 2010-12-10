@@ -111,7 +111,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 		ContactDatabase.get().addDataDisplay(cellTable);
 
 		initWidget(uiBinder.createAndBindUi(this));
-		button.setText("Click me");
+		button.setText("Click me to go to the new sortable table example");
 	}
 
 	@UiHandler("button")
