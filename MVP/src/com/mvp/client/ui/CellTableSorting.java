@@ -10,6 +10,7 @@ import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.ProvidesKey;
 import com.mvp.client.ui.CellTableViewImpl.GetValue;
 
 /**
@@ -24,6 +25,10 @@ public class CellTableSorting<T> extends CellTable<T> {
 
 	private final List<SortableHeader> allHeaders = new ArrayList<SortableHeader>();
 	private ListDataProvider<T> dataProvider = new ListDataProvider<T>();
+
+	public CellTableSorting(ProvidesKey<T> keyProvider) {
+		super(keyProvider);
+	}
 
 	/**
 	 * Add a column of a {@link Comparable} type using default comparators.
@@ -163,6 +168,23 @@ public class CellTableSorting<T> extends CellTable<T> {
 				return descending ? -comparison : comparison;
 			}
 		};
+	}
+
+	public void setData(List<T> data) {
+
+		if (dataProvider.getDataDisplays() != null
+				&& dataProvider.getDataDisplays().size() > 0) {
+			dataProvider.removeDataDisplay(this);
+			dataProvider.setList(data);
+
+			// cellTable.setRowData(0, items);
+			dataProvider.addDataDisplay(this);
+		} else {
+			dataProvider.setList(data);
+
+			// cellTable.setRowData(0, items);
+			dataProvider.addDataDisplay(this);
+		}
 	}
 
 }
