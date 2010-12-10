@@ -18,6 +18,8 @@ package com.mvp.client;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
+import com.mvp.client.ui.CellTableSortingView;
+import com.mvp.client.ui.CellTableSortingViewImpl;
 import com.mvp.client.ui.CellTableView;
 import com.mvp.client.ui.CellTableViewImpl;
 import com.mvp.client.ui.GoodbyeView;
@@ -32,6 +34,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	private final HelloView helloView = new HelloViewImpl();
 	private final GoodbyeView goodbyeView = new GoodbyeViewImpl();
 	private final CellTableView cellTableView = new CellTableViewImpl();
+	private final CellTableSortingView cellTableSortingView = new CellTableSortingViewImpl();
 
 	@Override
 	public EventBus getEventBus() {
@@ -56,6 +59,11 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public CellTableView getCellTableView() {
 		return cellTableView;
+	}
+
+	@Override
+	public CellTableSortingView getCellTableSortableView() {
+		return cellTableSortingView;
 	}
 
 }
