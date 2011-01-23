@@ -69,4 +69,8 @@ public class CellTableActivity extends AbstractActivity implements
 				new CellTableSortingPlace("sorting table"));
 	}
 
+	@Override
+	public void onDialogBoxBtnClicked() {
+	}
+
 }
