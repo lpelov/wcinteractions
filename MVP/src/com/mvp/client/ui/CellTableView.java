@@ -32,6 +32,8 @@ public interface CellTableView extends IsWidget {
 		void goTo(Place place);
 
 		void onButtonClicked();
+		
+		void onDialogBoxBtnClicked();
 	}
 
 }
