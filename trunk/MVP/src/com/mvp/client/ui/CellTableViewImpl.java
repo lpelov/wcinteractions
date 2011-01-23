@@ -39,13 +39,16 @@ import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.SelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.mvp.client.ui.ContactDatabase.Category;
 import com.mvp.client.ui.ContactDatabase.ContactInfo;
+import com.mvp.client.ui.widget.DialogBoxExt;
 
 public class CellTableViewImpl extends Composite implements HasText,
 		CellTableView {
@@ -63,6 +66,9 @@ public class CellTableViewImpl extends Composite implements HasText,
 
 	@UiField
 	Button button;
+
+	@UiField
+	Button dialogBox;
 
 	@UiField
 	TextBox mytextbox;
@@ -112,9 +118,10 @@ public class CellTableViewImpl extends Composite implements HasText,
 
 		initWidget(uiBinder.createAndBindUi(this));
 		button.setText("Click me to go to the new sortable table example");
+		dialogBox.setText("Open DialogBox");
 	}
 
-	@UiHandler("button")
+	@UiHandler("button")	
 	void onClick(ClickEvent e) {
 		// experiments to give back to the presenter
 		// Window.alert("Hello!");
@@ -122,6 +129,33 @@ public class CellTableViewImpl extends Composite implements HasText,
 		presenter.onButtonClicked();
 	}
 
+	@UiHandler("dialogBox")
+	void onDialogBoxClick(ClickEvent e) {
+		//presenter.onDialogBoxBtnClicked();
+		HTML close = new HTML("<b>X</b>");
+		DialogBoxExt dialog = new DialogBoxExt(close);
+		
+		dialog.setAnimationEnabled(true);
+		dialog.setAutoHideEnabled(true);
+		
+		HTML text2 = new HTML("Text 1 Text 1 Text 1 Text 1 Text 1");
+		HTML text3 = new HTML("Text 2");
+		HTML text4 = new HTML("Text 3");
+		VerticalPanel vrPanel = new VerticalPanel();
+		
+		//dialog.setHTML("This is the header");
+		dialog.setWidth("250px");
+		
+		 vrPanel.add(text2);
+		 vrPanel.add(text3);
+		 vrPanel.add(text4);
+
+		dialog.setWidget(vrPanel);
+		
+		dialog.center();
+		dialog.show();
+	}
+	
 	public void setText(String text) {
 		// button.setText(text);
 	}
