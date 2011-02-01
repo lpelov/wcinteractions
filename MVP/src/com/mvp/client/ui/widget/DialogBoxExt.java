@@ -15,7 +15,6 @@
  */
 package com.mvp.client.ui.widget;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.safehtml.shared.SafeHtml;
@@ -159,7 +158,7 @@ public class DialogBoxExt extends DialogBox {
 
 		if (Element.is(target)) {
 			boolean t = w.getElement().isOrHasChild(Element.as(target));
-			GWT.log("isWidgetEvent:" + w + ':' + target + ':' + t);
+			// GWT.log("isWidgetEvent:" + w + ':' + target + ':' + t);
 			return t;
 		}
 		return false;
