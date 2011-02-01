@@ -118,7 +118,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 
 		initWidget(uiBinder.createAndBindUi(this));
 		button.setText("Click me to go to the new sortable table example");
-		dialogBox.setText("Open DialogBox");
+		dialogBox.setText("Open DialogBox");		
 	}
 
 	@UiHandler("button")	
@@ -188,7 +188,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 		// Alternatively, you can call cellTable.setSelectionEnabled(true) to
 		// enable mouse selection.
 		Column<ContactInfo, Boolean> checkColumn = new Column<ContactInfo, Boolean>(
-				new CheckboxCell(true)) {
+				new CheckboxCell(true, true)) {
 			@Override
 			public Boolean getValue(ContactInfo object) {
 				// Get the value from the selection model.
@@ -304,7 +304,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 		C getValue(T object);
 	}
 
-	private final List<SortableHeader> allHeaders = new ArrayList<SortableHeader>();
+	private final List<SortHeader> allHeaders = new ArrayList<SortHeader>();
 
 	/**
 	 * The field to sort by.
@@ -367,7 +367,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 			}
 		};
 
-		final SortableHeader header = new SortableHeader(text);
+		final SortHeader header = new SortHeader(text);
 		allHeaders.add(header);
 
 		// call this everytime headers is clicked
@@ -376,7 +376,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 				header.setSorted(true);
 				header.toggleReverseSort();
 
-				for (SortableHeader otherHeader : allHeaders) {
+				for (SortHeader otherHeader : allHeaders) {
 					if (otherHeader != header) {
 						otherHeader.setSorted(false);
 						otherHeader.setReverseSort(true);
