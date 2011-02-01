@@ -40,6 +40,11 @@ import com.mvp.client.ui.CellTableViewImpl.GetValue;
 import com.mvp.client.ui.ContactDatabase.Category;
 import com.mvp.client.ui.ContactDatabase.ContactInfo;
 
+/**
+ * Cell table sorting view implementation
+ * 
+ * @author L.Pelov
+ */
 public class CellTableSortingViewImpl extends Composite implements
 		CellTableSortingView {
 
@@ -100,7 +105,7 @@ public class CellTableSortingViewImpl extends Composite implements
 		// Alternatively, you can call cellTable.setSelectionEnabled(true) to
 		// enable mouse selection.
 		Column<ContactInfo, Boolean> checkColumn = new Column<ContactInfo, Boolean>(
-				new CheckboxCell(true)) {
+				new CheckboxCell(true, true)) {
 			@Override
 			public Boolean getValue(ContactInfo object) {
 				// Get the value from the selection model.
@@ -121,7 +126,7 @@ public class CellTableSortingViewImpl extends Composite implements
 					public String getValue(ContactInfo object) {
 						return object.getFirstName();
 					}
-				});
+				}, new SortHeader("First name"));
 
 		// Last name.
 		Column<ContactInfo, String> lastNameColumn = new Column<ContactInfo, String>(
@@ -173,14 +178,14 @@ public class CellTableSortingViewImpl extends Composite implements
 					public String getValue(ContactInfo object) {
 						return object.getAddress();
 					}
-				});
+				}, new SortHeader("Address"));
 
 		cellTable.addColumn("Birthday", new DateCell(),
 				new GetValue<ContactInfo, Date>() {
 					public Date getValue(ContactInfo object) {
 						return object.getBirthday();
 					}
-				});
+				}, new SortHeader("Birthday"));
 	}
 
 }
