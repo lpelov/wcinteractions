@@ -59,13 +59,43 @@ public class CellTableSorting<T> extends CellTable<T> {
 	 * @param getter
 	 *            the {@link GetValue} used to retrieve cell values
 	 * @return the new column
+	 * @deprecated - use {@link #CellTableSorting(final String text, final
+	 *             Cell<C> cell, final GetValue<T, C> getter, final
+	 *             SortableHeader header)}
 	 */
 	public <C extends Comparable<C>> Column<T, C> addColumn(final String text,
 			final Cell<C> cell, final GetValue<T, C> getter) {
 
 		return addColumn(text, cell, getter,
 				createColumnComparator(getter, false),
-				createColumnComparator(getter, true));
+				createColumnComparator(getter, true), new SortHeader(text));
+	}
+
+	/**
+	 * Add a column of a {@link Comparable} type using default comparators.
+	 * 
+	 * @param <C>
+	 *            the column type
+	 * @param table
+	 *            the table
+	 * @param text
+	 *            the header text
+	 * @param cell
+	 *            the cell used to render values
+	 * @param getter
+	 *            the {@link GetValue} used to retrieve cell values
+	 * @param header
+	 *            - custom implemented header which extends
+	 *            {@link SortableHeader}
+	 * @return the new column
+	 */
+	public <C extends Comparable<C>> Column<T, C> addColumn(final String text,
+			final Cell<C> cell, final GetValue<T, C> getter,
+			final SortableHeader header) {
+
+		return addColumn(text, cell, getter,
+				createColumnComparator(getter, false),
+				createColumnComparator(getter, true), header);
 	}
 
 	/**
@@ -89,7 +119,7 @@ public class CellTableSorting<T> extends CellTable<T> {
 	 */
 	private <C> Column<T, C> addColumn(final String text, final Cell<C> cell,
 			final GetValue<T, C> getter, final Comparator<T> ascComparator,
-			final Comparator<T> descComparator) {
+			final Comparator<T> descComparator, final SortableHeader header) {
 
 		// gets the cell value
 		final Column<T, C> column = new Column<T, C>(cell) {
@@ -99,7 +129,8 @@ public class CellTableSorting<T> extends CellTable<T> {
 			}
 		};
 
-		final SortableHeader header = new SortableHeader(text);
+		// TODO: make this external to be able to add separated headers
+		// SortHeader header = new SortHeader(text);
 		allHeaders.add(header);
 
 		// call this every time headers is clicked
