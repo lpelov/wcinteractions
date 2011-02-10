@@ -1,4 +1,4 @@
-package com.mvp.client.ui;
+package com.mvp.client.ui.widget;
 
 import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.user.cellview.client.Header;

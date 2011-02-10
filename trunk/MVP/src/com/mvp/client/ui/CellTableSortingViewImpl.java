@@ -36,9 +36,12 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.view.client.SelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.mvp.client.data.ContactDatabase;
+import com.mvp.client.data.ContactDatabase.Category;
+import com.mvp.client.data.ContactDatabase.ContactInfo;
 import com.mvp.client.ui.CellTableViewImpl.GetValue;
-import com.mvp.client.ui.ContactDatabase.Category;
-import com.mvp.client.ui.ContactDatabase.ContactInfo;
+import com.mvp.client.ui.widget.CellTableSorting;
+import com.mvp.client.ui.widget.SortHeader;
 
 /**
  * Cell table sorting view implementation

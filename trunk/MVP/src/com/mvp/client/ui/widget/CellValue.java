@@ -13,22 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.mvp.client.ui;
+package com.mvp.client.ui.widget;
 
-import com.google.gwt.place.shared.Place;
-import com.google.gwt.user.client.ui.IsWidget;
-
-/**
- * Represents cell table sorting view.
- * @author L.Pelov
- */
-public interface CellTableSortingView extends IsWidget {
-
-	void setName(String tableName);
-
-	void setPresenter(Presenter presenter);
-
-	public interface Presenter {
-		void goTo(Place place);
-	}
+public interface CellValue {
+	String getValue();
 }
