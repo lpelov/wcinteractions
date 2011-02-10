@@ -46,9 +46,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.SelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
-import com.mvp.client.ui.ContactDatabase.Category;
-import com.mvp.client.ui.ContactDatabase.ContactInfo;
+import com.mvp.client.data.ContactDatabase;
+import com.mvp.client.data.ContactDatabase.Category;
+import com.mvp.client.data.ContactDatabase.ContactInfo;
 import com.mvp.client.ui.widget.DialogBoxExt;
+import com.mvp.client.ui.widget.SortHeader;
 
 public class CellTableViewImpl extends Composite implements HasText,
 		CellTableView {
