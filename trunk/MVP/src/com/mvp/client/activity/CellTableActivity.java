@@ -34,25 +34,20 @@ public class CellTableActivity extends AbstractActivity implements
 	// Name that will be appended to "Hello,"
 	private String name;
 
-	// private String somerpcdata = "no data";
-
 	public CellTableActivity(CellTablePlace place, ClientFactory clientFactory) {
 		this.name = place.getCellTableName();
 		this.clientFactory = clientFactory;
 
-		// Window.alert("Do RPC Call Here");
-		// somerpcdata = "I've got the data";
+		// Window.alert("You can Do RPC Call Here");
 	}
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
-		// Window.alert(somerpcdata);
-
 		// you can use here every view you want
 		CellTableView cellTableView = clientFactory.getCellTableView();
 		cellTableView.setName(name);
 		cellTableView.setPresenter(this);
-		panel.setWidget(cellTableView);
+		panel.setWidget(cellTableView);		
 	}
 
 	@Override
@@ -66,7 +61,7 @@ public class CellTableActivity extends AbstractActivity implements
 		// clientFactory.getPlaceController().goTo(new
 		// HelloPlace("after table"));
 		clientFactory.getPlaceController().goTo(
-				new CellTableSortingPlace("sorting table"));
+				new CellTableSortingPlace("sortingtable"));
 	}
 
 	@Override

@@ -34,7 +34,6 @@ import com.mvp.client.place.CellTablePlace;
  */
 public class MVP implements EntryPoint {
 
-	// private Place defaultPlace = new HelloPlace("my mvp place");
 	private Place defaultPlace = new CellTablePlace("lyudmil's cell table view");
 	private SimplePanel appWidget = new SimplePanel();
 

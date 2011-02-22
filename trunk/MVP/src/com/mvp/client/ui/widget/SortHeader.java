@@ -32,14 +32,22 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 public class SortHeader extends SortableHeader {
 
 	interface Template extends SafeHtmlTemplates {
-		@Template("<div style=\"position:relative;cursor:hand;cursor:pointer;"
-				+ "padding-right:{0}px;\">{1}<div>{2}</div></div>")
+//		@Template("<div style=\"position:relative;cursor:hand;cursor:pointer;"
+//				+ "padding-right:{0}px;\">{1}<div>{2}</div></div>")
+//		SafeHtml sorted(int imageWidth, SafeHtml arrow, String text);
+//
+//		@Template("<div style=\"position:relative;cursor:hand;cursor:pointer;"
+//				+ "padding-right:{0}px;\"><div style=\"position:absolute;display:none;"
+//				+ "\"></div><div>{1}</div></div>")
+//		SafeHtml unsorted(int imageWidth, String text);
+		
+		@Template("<div class=\"sortHeaderSorted\">{1}<div>{2}</div></div>")
 		SafeHtml sorted(int imageWidth, SafeHtml arrow, String text);
 
-		@Template("<div style=\"position:relative;cursor:hand;cursor:pointer;"
-				+ "padding-right:{0}px;\"><div style=\"position:absolute;display:none;"
+		@Template("<div class=\"sortHeaderUnsorted\"><div class=\"divStyle"
 				+ "\"></div><div>{1}</div></div>")
 		SafeHtml unsorted(int imageWidth, String text);
+
 	}
 
 	private static Template template;
