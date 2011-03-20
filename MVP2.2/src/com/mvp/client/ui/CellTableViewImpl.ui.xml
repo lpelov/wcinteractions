@@ -27,7 +27,7 @@
 			text-align: left;
 		}
 	</ui:style>
-	<g:HTMLPanel>
+	<g:HTMLPanel ui:field="htmlPanel">
 		Hello,
 		<g:Button styleName="{style.important}" ui:field="button" />
 		<g:Button styleName="{style.important}" ui:field="dialogBox" />
