@@ -32,6 +32,8 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.view.client.SelectionModel;
@@ -55,13 +57,17 @@ public class CellTableSortingViewImpl extends Composite implements
 	Element nameSpan = DOM.createSpan();
 	Presenter presenter;
 	SimplePager pager;
+	Anchor noClickAnchor = new Anchor("Click Me", "#");
+	CellTableSorting<ContactDatabase.ContactInfo> cellTable = new CellTableSorting<ContactDatabase.ContactInfo>(
+			ContactDatabase.ContactInfo.KEY_PROVIDER);
+	
+	final SingleSelectionModel<ContactInfo> selectionModel = new SingleSelectionModel<ContactInfo>(
+			ContactInfo.KEY_PROVIDER);
 
 	public CellTableSortingViewImpl() {
 
 		viewPanel.getElement().appendChild(nameSpan);
 
-		CellTableSorting<ContactDatabase.ContactInfo> cellTable = new CellTableSorting<ContactDatabase.ContactInfo>(
-				ContactDatabase.ContactInfo.KEY_PROVIDER);
 
 		// Create a Pager to control the table.
 		SimplePager.Resources pagerResources = GWT
@@ -71,8 +77,6 @@ public class CellTableSortingViewImpl extends Composite implements
 		pager.setDisplay(cellTable);
 
 		// Add a selection model so we can select cells.
-		final SingleSelectionModel<ContactInfo> selectionModel = new SingleSelectionModel<ContactInfo>(
-				ContactInfo.KEY_PROVIDER);
 		cellTable.setSelectionModel(selectionModel);
 
 		// Initialize the columns.
@@ -85,8 +89,15 @@ public class CellTableSortingViewImpl extends Composite implements
 		cellTable.setData(data);
 
 		viewPanel.add(cellTable);
-
+		viewPanel.getElement().appendChild(noClickAnchor.getElement());
+		
 		initWidget(viewPanel);
+		
+		noClickAnchor.unsinkEvents(Event.MOUSEEVENTS);
+		//noClickAnchor.setHref("javascript:function(){return false;}");
+		
+		
+		
 	}
 
 	@Override

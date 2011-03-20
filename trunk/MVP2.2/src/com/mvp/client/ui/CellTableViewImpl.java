@@ -40,6 +40,7 @@ import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -67,6 +68,9 @@ public class CellTableViewImpl extends Composite implements HasText,
 	// }
 
 	@UiField
+	HTMLPanel htmlPanel;
+	
+	@UiField
 	Button button;
 
 	@UiField
@@ -89,7 +93,7 @@ public class CellTableViewImpl extends Composite implements HasText,
 
 	// UI Binders
 	private Presenter presenter;
-
+	
 	public CellTableViewImpl(/* String firstName */) {
 		// Create a CellTable.
 
@@ -120,7 +124,8 @@ public class CellTableViewImpl extends Composite implements HasText,
 
 		initWidget(uiBinder.createAndBindUi(this));
 		button.setText("Click me to go to the new sortable table example");
-		dialogBox.setText("Open DialogBox");		
+		dialogBox.setText("Open DialogBox");	
+				
 	}
 
 	@UiHandler("button")	

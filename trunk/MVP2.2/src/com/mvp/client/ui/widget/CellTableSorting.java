@@ -24,6 +24,7 @@ import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
 import com.mvp.client.ui.CellTableViewImpl.GetValue;
@@ -231,6 +232,19 @@ public class CellTableSorting<T> extends CellTable<T> {
 			// cellTable.setRowData(0, items);
 			dataProvider.addDataDisplay(this);
 		}
+	}
+
+	public ListDataProvider<T> getDataProvider() {
+		return dataProvider;
+	}
+
+	@Override
+	protected void onBrowserEvent2(Event event) {
+		// here we can try to get the current event and hang some special
+		// functionality
+
+		// super.onBrowserEvent2(event);
+
 	}
 
 }
