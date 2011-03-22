@@ -18,6 +18,7 @@ package com.mvp.client.ui;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.cell.client.Cell;
@@ -45,6 +46,7 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.gwt.view.client.SelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.mvp.client.data.ContactDatabase;
@@ -52,6 +54,7 @@ import com.mvp.client.data.ContactDatabase.Category;
 import com.mvp.client.data.ContactDatabase.ContactInfo;
 import com.mvp.client.ui.widget.DialogBoxExt;
 import com.mvp.client.ui.widget.SortHeader;
+import com.mvp.shared.DemoUser;
 
 public class CellTableViewImpl extends Composite implements HasText,
 		CellTableView {
@@ -123,6 +126,21 @@ public class CellTableViewImpl extends Composite implements HasText,
 		ContactDatabase.get().addDataDisplay(cellTable);
 
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		String firstname = "John";
+		String lastname = "Familyguy";
+		Date age = new Date(); // get's the current date/time
+		
+		DemoUser myuser = new DemoUser(firstname, lastname, age);		
+		
+		CalendarUtil.addDaysToDate(age, 2);
+		
+		mytextbox.setText(myuser.getAge().toString());
+		
+		CalendarUtil.addDaysToDate(myuser.getAge(), 5);
+		
+		mytextbox.setText(myuser.getAge().toString());
+		
 		button.setText("Click me to go to the new sortable table example");
 		dialogBox.setText("Open DialogBox");	
 				
