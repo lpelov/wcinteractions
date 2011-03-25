@@ -15,6 +15,8 @@
  */
 package com.mvp.client.ui.widget;
 
+import com.google.gwt.cell.client.Cell.Context;
+import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
@@ -28,26 +30,16 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * 
  * @author L.Pelov
  */
-
 public class SortHeader extends SortableHeader {
 
 	interface Template extends SafeHtmlTemplates {
-//		@Template("<div style=\"position:relative;cursor:hand;cursor:pointer;"
-//				+ "padding-right:{0}px;\">{1}<div>{2}</div></div>")
-//		SafeHtml sorted(int imageWidth, SafeHtml arrow, String text);
-//
-//		@Template("<div style=\"position:relative;cursor:hand;cursor:pointer;"
-//				+ "padding-right:{0}px;\"><div style=\"position:absolute;display:none;"
-//				+ "\"></div><div>{1}</div></div>")
-//		SafeHtml unsorted(int imageWidth, String text);
-		
 		@Template("<div class=\"sortHeaderSorted\">{1}<div>{2}</div></div>")
 		SafeHtml sorted(int imageWidth, SafeHtml arrow, String text);
 
 		@Template("<div class=\"sortHeaderUnsorted\"><div class=\"divStyle"
 				+ "\"></div><div>{1}</div></div>")
 		SafeHtml unsorted(int imageWidth, String text);
-
+		
 	}
 
 	private static Template template;
@@ -74,26 +66,46 @@ public class SortHeader extends SortableHeader {
 		return SafeHtmlUtils.fromTrustedString(html);
 	}
 
+	private boolean reverseSort = false;
+	private boolean sorted = false;
+	private String text;
+
 	public SortHeader(String text) {
-		super(text);
+		super(new ClickableTextCell());
 		if (template == null) {
 			template = GWT.create(Template.class);
 		}
-
+		this.text = text;
 	}
 
-	/**
-	 * This has been change in the latest GWT version 2.1.1
-	 */
-	@Override
-	public void render(com.google.gwt.cell.client.Cell.Context context,
-			SafeHtmlBuilder sb) {
+	public boolean getReverseSort() {
+		return reverseSort;
+	}
 
+	@Override
+	public String getValue() {
+		return text;
+	}
+
+	@Override
+	public void render(Context context, SafeHtmlBuilder sb) {
 		if (sorted) {
-			sb.append(template.sorted(IMAGE_WIDTH,
-					getReverseSort() ? DOWN_ARROW : UP_ARROW, getValue()));
+			sb.append(template.sorted(IMAGE_WIDTH, reverseSort ? DOWN_ARROW
+					: UP_ARROW, text));
 		} else {
-			sb.append(template.unsorted(IMAGE_WIDTH, getValue()));
-		}
+			sb.append(template.unsorted(IMAGE_WIDTH, text));
+		}		
+	}
+	
+	public void setReverseSort(boolean reverseSort) {
+		this.reverseSort = reverseSort;
+	}
+
+	public void setSorted(boolean sorted) {
+		this.sorted = sorted;
+	}
+
+	public void toggleReverseSort() {
+		this.reverseSort = !this.reverseSort;
 	}
 }
