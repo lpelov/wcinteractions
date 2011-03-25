@@ -1,6 +1,6 @@
 package com.mvp.client.ui.widget;
 
-import com.google.gwt.cell.client.ClickableTextCell;
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.user.cellview.client.Header;
 
 /**
@@ -11,22 +11,15 @@ import com.google.gwt.user.cellview.client.Header;
  */
 public abstract class SortableHeader extends Header<String> {
 
+	public SortableHeader(Cell<String> cell) {
+		super(cell);
+	}
+
 	private boolean reverseSort = false;
 	protected boolean sorted = false;
-	private String text;
-
-	public SortableHeader(String text) {
-		super(new ClickableTextCell());
-		this.text = text;
-	}
 
 	public boolean getReverseSort() {
 		return reverseSort;
-	}
-
-	@Override
-	public String getValue() {
-		return text;
 	}
 
 	public void setReverseSort(boolean reverseSort) {

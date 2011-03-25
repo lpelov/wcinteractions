@@ -25,6 +25,7 @@ import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
 import com.mvp.client.ui.CellTableViewImpl.GetValue;
@@ -131,12 +132,13 @@ public class CellTableSorting<T> extends CellTable<T> {
 		};
 
 		// TODO: make this external to be able to add separated headers
-		// SortHeader header = new SortHeader(text);
+		// final SortHeader header = new SortHeader(text);
 		allHeaders.add(header);
 
-		// call this every time headers is clicked
 		header.setUpdater(new ValueUpdater<String>() {
+			@Override
 			public void update(String value) {
+				Window.alert("I am clicked");
 				header.setSorted(true);
 				header.toggleReverseSort();
 
@@ -243,8 +245,9 @@ public class CellTableSorting<T> extends CellTable<T> {
 		// here we can try to get the current event and hang some special
 		// functionality
 
-		// super.onBrowserEvent2(event);
-
+		// IMPORTANT: Do not remove this otherwise all clicks on the table will
+		// be disabled.
+		super.onBrowserEvent2(event);
 	}
 
 }
