@@ -22,9 +22,12 @@ import java.util.List;
 
 import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.ValueUpdater;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
@@ -45,6 +48,52 @@ public class CellTableSorting<T> extends CellTable<T> {
 
 	public CellTableSorting(ProvidesKey<T> keyProvider) {
 		super(keyProvider);
+		
+	    // Setup a history handler to reselect the associate menu item.
+	    final ValueChangeHandler<String> historyHandler = new ValueChangeHandler<
+	        String>() {
+	      public void onValueChange(ValueChangeEvent<String> event) {
+	    	  
+	    	  Window.alert("Event value: " + event.getValue());
+	    	  
+//				// sort the clicked column
+//				sortExpenses(dataProvider.getList(),
+//						header.getReverseSort() ? descComparator
+//								: ascComparator);
+
+				// cellTable.redrawHeaders();
+//				redrawHeaders();
+	    	  
+	    	  
+/*	        // Get the content widget associated with the history token.
+	        ContentWidget contentWidget = treeModel.getContentWidgetForToken(
+	            event.getValue());
+	        if (contentWidget == null) {
+	          return;
+	        }
+
+	        // Expand the tree node associated with the content.
+	        Category category = treeModel.getCategoryForContentWidget(
+	            contentWidget);
+	        TreeNode node = mainMenu.getRootTreeNode();
+	        int childCount = node.getChildCount();
+	        for (int i = 0; i < childCount; i++) {
+	          if (node.getChildValue(i) == category) {
+	            node.setChildOpen(i, true, true);
+	            break;
+	          }
+	        }
+
+	        // Select the node in the tree.
+	        selectionModel.setSelected(contentWidget, true);
+
+	        // Display the content widget.
+	        displayContentWidget(contentWidget);*/
+	      }
+	    };
+	    
+	    History.addValueChangeHandler(historyHandler);
+		
 	}
 
 	/**
@@ -138,7 +187,19 @@ public class CellTableSorting<T> extends CellTable<T> {
 		header.setUpdater(new ValueUpdater<String>() {
 			@Override
 			public void update(String value) {
-				Window.alert("I am clicked");
+				// Window.alert("History changer " + History.getToken());
+				
+				// TODO:
+				// every time you click here, you can put the vent into a hashmap
+				// and then onHistoryChange you can repeat the action!!!
+				
+				// put history tocken every time you click here
+				String historyTocken = History.getToken();
+				
+				if (!historyTocken.endsWith(":"+header.getValue()+":")) {
+					History.newItem(historyTocken+":"+header.getValue()+":", true);
+				}				
+				
 				header.setSorted(true);
 				header.toggleReverseSort();
 
