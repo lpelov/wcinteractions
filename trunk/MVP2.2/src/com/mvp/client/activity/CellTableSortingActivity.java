@@ -58,7 +58,7 @@ public class CellTableSortingActivity extends AbstractActivity implements
 	}
 
 	@Override
-	public void goTo(Place place) {
+	public void goTo(Place place) {		
 	}
 
 }
