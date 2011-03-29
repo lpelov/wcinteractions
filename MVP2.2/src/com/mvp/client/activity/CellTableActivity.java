@@ -51,7 +51,7 @@ public class CellTableActivity extends AbstractActivity implements
 	}
 
 	@Override
-	public void goTo(Place place) {
+	public void goTo(Place place) {		
 		clientFactory.getPlaceController().goTo(place);
 	}
 
