@@ -25,8 +25,8 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.mvp.client.mvp.AppActivityMapper;
-import com.mvp.client.mvp.AppPlaceHistoryMapper;
+import com.mvp.client.mapper.AppActivityMapper;
+import com.mvp.client.mapper.AppPlaceHistoryMapper;
 import com.mvp.client.place.CellTablePlace;
 
 /**
