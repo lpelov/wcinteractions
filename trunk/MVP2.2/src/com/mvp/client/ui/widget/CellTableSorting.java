@@ -22,13 +22,9 @@ import java.util.List;
 
 import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.ValueUpdater;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
 import com.mvp.client.ui.CellTableViewImpl.GetValue;
@@ -50,11 +46,12 @@ public class CellTableSorting<T> extends CellTable<T> {
 		super(keyProvider);
 		
 	    // Setup a history handler to reselect the associate menu item.
-	    final ValueChangeHandler<String> historyHandler = new ValueChangeHandler<
-	        String>() {
-	      public void onValueChange(ValueChangeEvent<String> event) {
-	    	  
-	    	  Window.alert("Event value: " + event.getValue());
+//	    final ValueChangeHandler<String> historyHandler = new ValueChangeHandler<
+//	        String>() {
+//	      public void onValueChange(ValueChangeEvent<String> event) {
+
+// later check how you can work with the event's here	    	  
+//	    	  Window.alert("Event value: " + event.getValue());
 	    	  
 //				// sort the clicked column
 //				sortExpenses(dataProvider.getList(),
@@ -89,10 +86,10 @@ public class CellTableSorting<T> extends CellTable<T> {
 
 	        // Display the content widget.
 	        displayContentWidget(contentWidget);*/
-	      }
-	    };
+//	      }
+//	    };
 	    
-	    History.addValueChangeHandler(historyHandler);
+	    // History.addValueChangeHandler(historyHandler);
 		
 	}
 
@@ -194,11 +191,11 @@ public class CellTableSorting<T> extends CellTable<T> {
 				// and then onHistoryChange you can repeat the action!!!
 				
 				// put history tocken every time you click here
-				String historyTocken = History.getToken();
+//				String historyTocken = History.getToken();
 				
-				if (!historyTocken.endsWith(":"+header.getValue()+":")) {
-					History.newItem(historyTocken+":"+header.getValue()+":", true);
-				}				
+//				if (!historyTocken.endsWith(":"+header.getValue()+":")) {
+//					History.newItem(historyTocken+":"+header.getValue()+":", true);
+//				}				
 				
 				header.setSorted(true);
 				header.toggleReverseSort();

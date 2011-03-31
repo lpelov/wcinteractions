@@ -23,10 +23,12 @@ import com.mvp.client.activity.CellTableActivity;
 import com.mvp.client.activity.CellTableSortingActivity;
 import com.mvp.client.activity.GoodbyeActivity;
 import com.mvp.client.activity.HelloActivity;
+import com.mvp.client.activity.RootActivity;
 import com.mvp.client.place.CellTablePlace;
 import com.mvp.client.place.CellTableSortingPlace;
 import com.mvp.client.place.GoodbyePlace;
 import com.mvp.client.place.HelloPlace;
+import com.mvp.client.place.RootPlace;
 
 public class AppActivityMapper implements ActivityMapper {
 
@@ -48,6 +50,10 @@ public class AppActivityMapper implements ActivityMapper {
 		else if (place instanceof CellTableSortingPlace)
 			return new CellTableSortingActivity((CellTableSortingPlace) place,
 					clientFactory);
+		else if (place instanceof RootPlace)
+			return new RootActivity((RootPlace) place,
+					clientFactory);
+
 		return null;
 
 	}

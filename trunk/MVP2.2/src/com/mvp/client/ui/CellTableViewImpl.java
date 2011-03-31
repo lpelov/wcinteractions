@@ -52,6 +52,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import com.mvp.client.data.ContactDatabase;
 import com.mvp.client.data.ContactDatabase.Category;
 import com.mvp.client.data.ContactDatabase.ContactInfo;
+import com.mvp.client.place.RootPlace;
 import com.mvp.client.ui.widget.DialogBoxExt;
 import com.mvp.client.ui.widget.SortHeader;
 import com.mvp.shared.DemoUser;
@@ -75,6 +76,9 @@ public class CellTableViewImpl extends Composite implements HasText,
 	
 	@UiField
 	Button button;
+
+	@UiField
+	Button button2;
 
 	@UiField
 	Button dialogBox;
@@ -142,10 +146,17 @@ public class CellTableViewImpl extends Composite implements HasText,
 		mytextbox.setText(myuser.getAge().toString());
 		
 		button.setText("Click me to go to the new sortable table example");
+		button2.setText("CustomPlaces");
 		dialogBox.setText("Open DialogBox");	
 				
 	}
-
+	
+	@UiHandler("button2")	
+	void onButton2Click(ClickEvent e) {
+		this.presenter.goTo(new RootPlace("rootview"));
+	}
+	
+	
 	@UiHandler("button")	
 	void onClick(ClickEvent e) {
 		// experiments to give back to the presenter
