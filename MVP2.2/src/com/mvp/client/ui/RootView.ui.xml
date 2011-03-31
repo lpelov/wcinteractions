@@ -1,0 +1,26 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:c="urn:import:com.mvp.client.ui.widget">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	
+  <g:DockLayoutPanel unit='EM'>
+    <g:north size='5'>
+      <!-- c:TopPanel ui:field='topPanel' / -->
+          <c:SimpleWidgetPanel ui:field='topPanel' >
+          </c:SimpleWidgetPanel>                 
+      
+    </g:north>   
+    <g:center>
+          <c:SimpleWidgetPanel ui:field='leftPanel' >
+          </c:SimpleWidgetPanel>                 
+    </g:center>
+    <g:east size='50'>
+        <c:SimpleWidgetPanel ui:field='rightPanel' >
+        </c:SimpleWidgetPanel>
+    </g:east>   
+  </g:DockLayoutPanel></ui:UiBinder> 
