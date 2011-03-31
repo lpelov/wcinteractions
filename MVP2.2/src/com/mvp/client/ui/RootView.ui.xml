@@ -1,26 +1,41 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:c="urn:import:com.mvp.client.ui.widget">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.mvp.client.ui.widget"
+	xmlns:h="urn:import:com.mvp.client.ui.widget">
 	<ui:style>
-		.important {
-			font-weight: bold;
+		.eastPanel {
+			background-color: #F60;
+		}
+		
+		.westPanel {
+			background-color: #EEE;
+		}
+		
+		.northPanel {
+			background-color: #39F;
+		}
+		
+		.southPanel {
+			background-color: #99C;
+		}
+		
+		.centerPanel {
+			background-color: #FFC;
 		}
 	</ui:style>
-	
-  <g:DockLayoutPanel unit='EM'>
-    <g:north size='5'>
-      <!-- c:TopPanel ui:field='topPanel' / -->
-          <c:SimpleWidgetPanel ui:field='topPanel' >
-          </c:SimpleWidgetPanel>                 
-      
-    </g:north>   
-    <g:center>
-          <c:SimpleWidgetPanel ui:field='leftPanel' >
-          </c:SimpleWidgetPanel>                 
-    </g:center>
-    <g:east size='50'>
-        <c:SimpleWidgetPanel ui:field='rightPanel' >
-        </c:SimpleWidgetPanel>
-    </g:east>   
-  </g:DockLayoutPanel></ui:UiBinder> 
+
+	<g:DockLayoutPanel unit='EM'>
+		<g:north size='2'>
+			<g:FlowPanel styleName="{style.northPanel}">
+				<g:Label>This is the NORTH panel</g:Label>
+			</g:FlowPanel>
+		</g:north>
+		<g:west size='15'>
+			<g:ScrollPanel ui:field='leftPanel' />
+		</g:west>
+		<g:center>
+			<g:ScrollPanel ui:field='rightPanel' />
+		</g:center>
+	</g:DockLayoutPanel>
+
+</ui:UiBinder> 

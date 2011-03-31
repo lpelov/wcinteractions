@@ -26,6 +26,8 @@ import com.mvp.client.ui.GoodbyeView;
 import com.mvp.client.ui.GoodbyeViewImpl;
 import com.mvp.client.ui.HelloView;
 import com.mvp.client.ui.HelloViewImpl;
+import com.mvp.client.ui.MainView;
+import com.mvp.client.ui.RootView;
 
 public class ClientFactoryImpl implements ClientFactory {
 	private final EventBus eventBus = new SimpleEventBus();
@@ -35,6 +37,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	private final GoodbyeView goodbyeView = new GoodbyeViewImpl();
 	private final CellTableView cellTableView = new CellTableViewImpl();
 	private final CellTableSortingView cellTableSortingView = new CellTableSortingViewImpl();
+	private final MainView rootView = new RootView();
 
 	@Override
 	public EventBus getEventBus() {
@@ -64,6 +67,11 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public CellTableSortingView getCellTableSortableView() {
 		return cellTableSortingView;
+	}
+
+	@Override
+	public MainView getRootView() {
+		return rootView;
 	}
 
 }

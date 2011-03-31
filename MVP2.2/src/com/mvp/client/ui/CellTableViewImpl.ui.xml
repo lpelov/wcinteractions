@@ -30,6 +30,7 @@
 	<g:HTMLPanel ui:field="htmlPanel">
 		Hello,
 		<g:Button styleName="{style.important}" ui:field="button" />
+		<g:Button styleName="{style.important}" ui:field="button2" />
 		<g:Button styleName="{style.important}" ui:field="dialogBox" />
 		<g:TextBox ui:field="mytextbox"></g:TextBox>
 		

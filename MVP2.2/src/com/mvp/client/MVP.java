@@ -23,11 +23,11 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.mvp.client.mapper.AppActivityMapper;
 import com.mvp.client.mapper.AppPlaceHistoryMapper;
 import com.mvp.client.place.CellTablePlace;
+import com.mvp.client.ui.widget.SimpleWidgetPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -35,7 +35,7 @@ import com.mvp.client.place.CellTablePlace;
 public class MVP implements EntryPoint {
 
 	private Place defaultPlace = new CellTablePlace("Sortable celltable view");
-	private SimplePanel appWidget = new SimplePanel();
+	private SimpleWidgetPanel appWidget = new SimpleWidgetPanel();
 
 	/**
 	 * This is the entry point method.
@@ -59,7 +59,8 @@ public class MVP implements EntryPoint {
 				historyMapper);
 		historyHandler.register(placeController, eventBus, defaultPlace);
 
-		RootPanel.get().add(appWidget);
+		RootLayoutPanel.get().add(appWidget);
+		//RootPanel.get().add(appWidget);
 
 		// Goes to the place represented on URL else default place
 		historyHandler.handleCurrentHistory();

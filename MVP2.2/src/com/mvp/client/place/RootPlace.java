@@ -13,28 +13,32 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.mvp.client;
+package com.mvp.client.place;
 
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.place.shared.PlaceController;
-import com.mvp.client.ui.CellTableSortingView;
-import com.mvp.client.ui.CellTableView;
-import com.mvp.client.ui.GoodbyeView;
-import com.mvp.client.ui.HelloView;
-import com.mvp.client.ui.MainView;
+import com.google.gwt.place.shared.Place;
+import com.google.gwt.place.shared.PlaceTokenizer;
 
-public interface ClientFactory {
-	EventBus getEventBus();
+public class RootPlace extends Place {
 
-	PlaceController getPlaceController();
+	private String rootName;
 
-	HelloView getHelloView();
+	public RootPlace(String token) {
+		this.rootName = token;
+	}
 
-	GoodbyeView getGoodbyeView();
+	public String getRootName() {
+		return rootName;
+	}
 
-	CellTableView getCellTableView();
+	public static class Tokenizer implements PlaceTokenizer<RootPlace> {
+		@Override
+		public String getToken(RootPlace place) {
+			return place.getRootName();
+		}
 
-	CellTableSortingView getCellTableSortableView();
-	
-	MainView getRootView();
+		@Override
+		public RootPlace getPlace(String token) {
+			return new RootPlace(token);
+		}
+	}
 }
