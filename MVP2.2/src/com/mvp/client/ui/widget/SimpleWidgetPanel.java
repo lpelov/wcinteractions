@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Custom widget implementing the HasOneWidget interface.
+ * Custom widget implementing the AcceptsOneWidget interface.
  * 
  * @author L.Pelov
  */
