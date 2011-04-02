@@ -13,27 +13,32 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.mvp.client.ui;
+package com.mvp.client.place;
 
 import com.google.gwt.place.shared.Place;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.mvp.client.ClientFactory;
+import com.google.gwt.place.shared.PlaceTokenizer;
 
-/**
- * 
- * @author L.Pelov main widgets view
- */
-public interface MainView extends IsWidget {
+public class LeftSidePlace extends Place {
 
-	void setWidgetName(String widgetName);
-	
-	void setPresenter(Presenter presenter);
-	
-	ClientFactory getClientFactory();
+	private String rootName;
 
-	public interface Presenter {
-		
-		void goTo(Place place);		
+	public LeftSidePlace(String token) {
+		this.rootName = token;
 	}
 
+	public String getRootName() {
+		return rootName;
+	}
+
+	public static class Tokenizer implements PlaceTokenizer<LeftSidePlace> {
+		@Override
+		public String getToken(LeftSidePlace place) {
+			return place.getRootName();
+		}
+
+		@Override
+		public LeftSidePlace getPlace(String token) {
+			return new LeftSidePlace(token);
+		}
+	}
 }

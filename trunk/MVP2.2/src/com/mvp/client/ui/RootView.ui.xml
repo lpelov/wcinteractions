@@ -31,7 +31,9 @@
 			</g:FlowPanel>
 		</g:north>
 		<g:west size='15'>
-			<g:ScrollPanel ui:field='leftPanel' />
+			<g:ScrollPanel>
+				<g:SimplePanel ui:field="leftPanel"></g:SimplePanel>
+			</g:ScrollPanel>
 		</g:west>
 		<g:center>
 			<g:ScrollPanel ui:field='rightPanel' />

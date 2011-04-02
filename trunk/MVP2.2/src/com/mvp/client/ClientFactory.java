@@ -21,7 +21,9 @@ import com.mvp.client.ui.CellTableSortingView;
 import com.mvp.client.ui.CellTableView;
 import com.mvp.client.ui.GoodbyeView;
 import com.mvp.client.ui.HelloView;
+import com.mvp.client.ui.LeftSide;
 import com.mvp.client.ui.MainView;
+import com.mvp.client.ui.RightSide;
 
 public interface ClientFactory {
 	EventBus getEventBus();
@@ -37,4 +39,8 @@ public interface ClientFactory {
 	CellTableSortingView getCellTableSortableView();
 	
 	MainView getRootView();
+	
+	LeftSide getLeftSide();
+	
+	RightSide getRightSide();
 }
