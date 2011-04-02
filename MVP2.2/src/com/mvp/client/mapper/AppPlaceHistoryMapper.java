@@ -21,10 +21,13 @@ import com.mvp.client.place.CellTablePlace;
 import com.mvp.client.place.CellTableSortingPlace;
 import com.mvp.client.place.GoodbyePlace;
 import com.mvp.client.place.HelloPlace;
+import com.mvp.client.place.LeftSidePlace;
+import com.mvp.client.place.RightSidePlace;
 import com.mvp.client.place.RootPlace;
 
 @WithTokenizers({ CellTablePlace.Tokenizer.class, HelloPlace.Tokenizer.class,
-		GoodbyePlace.Tokenizer.class, CellTableSortingPlace.Tokenizer.class, RootPlace.Tokenizer.class })
+		GoodbyePlace.Tokenizer.class, CellTableSortingPlace.Tokenizer.class,
+		RootPlace.Tokenizer.class, RightSidePlace.Tokenizer.class, LeftSidePlace.Tokenizer.class })
 public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 
 	/*

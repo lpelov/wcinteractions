@@ -13,27 +13,29 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.mvp.client.ui;
+package com.mvp.client.mapper;
 
+import com.google.gwt.activity.shared.Activity;
+import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.mvp.client.ClientFactory;
+import com.mvp.client.activity.LeftSideActivity;
 
-/**
- * 
- * @author L.Pelov main widgets view
- */
-public interface MainView extends IsWidget {
+public class RootActivityMapper implements ActivityMapper {
 
-	void setWidgetName(String widgetName);
-	
-	void setPresenter(Presenter presenter);
-	
-	ClientFactory getClientFactory();
+	private ClientFactory clientFactory;
 
-	public interface Presenter {
+	public RootActivityMapper(ClientFactory clientFactory) {
+		super();
+		this.clientFactory = clientFactory;
+	}
+
+	@Override
+	public Activity getActivity(Place place) {
+		// The activity you will get here, is the one from the RootView!!!
 		
-		void goTo(Place place);		
+		return new LeftSideActivity(clientFactory);
+		
 	}
 
 }

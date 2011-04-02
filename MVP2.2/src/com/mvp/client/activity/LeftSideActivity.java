@@ -20,57 +20,43 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.mvp.client.ClientFactory;
-import com.mvp.client.place.CellTablePlace;
-import com.mvp.client.place.CellTableSortingPlace;
-import com.mvp.client.ui.CellTableView;
+import com.mvp.client.place.LeftSidePlace;
+import com.mvp.client.ui.LeftSide;
+import com.mvp.client.ui.MainView;
 
-public class CellTableActivity extends AbstractActivity implements
-		CellTableView.Presenter {
+/**
+ * Activity represents the root.
+ * 
+ * @author L.Pelov
+ */
+public class LeftSideActivity extends AbstractActivity implements
+		MainView.Presenter {
 
 	// Used to obtain views, eventBus, placeController
 	// Alternatively, could be injected via GIN
 	private ClientFactory clientFactory;
 
-	// Name that will be appended to "Hello,"
-	private String name;
-
-	public CellTableActivity(CellTablePlace place, ClientFactory clientFactory) {
-		this.name = place.getCellTableName();
-		this.clientFactory = clientFactory;
-
-		// Window.alert("You can Do RPC Call Here");
-	}
-
-	public CellTableActivity(String place, ClientFactory clientFactory) {
-		this.name = place;
+	public LeftSideActivity(LeftSidePlace place, ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
 	}
 
+	public LeftSideActivity(ClientFactory clientFactory) {
+		this.clientFactory = clientFactory;
+	}
+	
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
-		// you can use here every view you want
-		CellTableView cellTableView = clientFactory.getCellTableView();
-		cellTableView.setName(name);
-		cellTableView.setPresenter(this);
-		panel.setWidget(cellTableView);		
+//		MainView rootView = this.clientFactory.getRootView();		
+//		rootView.setPresenter(this);
+//		panel.setWidget(rootView);
+		
+		LeftSide leftSide = this.clientFactory.getLeftSide();
+		panel.setWidget(leftSide);
 	}
 
 	@Override
-	public void goTo(Place place) {		
+	public void goTo(Place place) {
 		clientFactory.getPlaceController().goTo(place);
-	}
-
-	@Override
-	public void onButtonClicked() {
-		// Window.alert("This is now the activity here");
-		// clientFactory.getPlaceController().goTo(new
-		// HelloPlace("after table"));
-		clientFactory.getPlaceController().goTo(
-				new CellTableSortingPlace("sortingtable"));
-	}
-
-	@Override
-	public void onDialogBoxBtnClicked() {
 	}
 
 }

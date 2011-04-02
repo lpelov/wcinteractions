@@ -39,6 +39,12 @@ public class GoodbyeActivity extends AbstractActivity implements
 
 	}
 
+	public GoodbyeActivity(ClientFactory clientFactory) {
+		this.name = "just a name";
+		this.clientFactory = clientFactory;
+
+	}
+
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
 		GoodbyeView goodbyeView = clientFactory.getGoodbyeView();

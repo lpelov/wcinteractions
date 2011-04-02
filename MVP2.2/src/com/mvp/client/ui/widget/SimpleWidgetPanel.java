@@ -12,6 +12,15 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class SimpleWidgetPanel extends LayoutPanel implements AcceptsOneWidget {
 
+//	private IsWidget widget = null;
+//	   
+//    @Override
+//    public void setWidget(IsWidget w) {
+//        if( widget != null) super.remove(widget);
+//        widget = w;
+//        if(w != null) super.add(w);
+//    }
+    
 	private Widget widget;
 
 	@Override
