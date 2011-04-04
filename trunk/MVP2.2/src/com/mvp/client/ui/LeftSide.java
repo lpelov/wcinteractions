@@ -1,13 +1,17 @@
 package com.mvp.client.ui;
 
+import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.TreeViewModel;
 import com.mvp.client.ClientFactory;
 import com.mvp.client.place.RootPlace;
 
@@ -24,14 +28,40 @@ public class LeftSide extends Composite {
 	
 	@UiField
 	Button button2;
+	@UiField(provided=true) CellTree cellTree = new CellTree(
+		new TreeViewModel() {
+//			final AbstractDataProvider<String> dataProvider = new ListDataProvider<String>();
+//			final AbstractSelectionModel<String> selectionModel = new NoSelectionModel<String>();
+			@Override
+			public <T> NodeInfo<?> getNodeInfo(T value) {
+			      /*
+			       * Create some data in a data provider. Use the parent value as a prefix
+			       * for the next level.
+			       */
+			      ListDataProvider<String> dataProvider = new ListDataProvider<String>();
+			      for (int i = 0; i < 2; i++) {
+			        dataProvider.getList().add(value + "." + String.valueOf(i));
+			      }
+
+			      // Return a node info that pairs the data with a cell.
+			      return new DefaultNodeInfo<String>(dataProvider, new TextCell());
+				//return new DefaultNodeInfo<String>(dataProvider, new TextCell(), selectionModel, null);
+			}
+			@Override
+			public boolean isLeaf(Object value) {
+				return value.toString().length() > 10;
+				//return true;
+			}
+		}, "Item 1");
 
 	ClientFactory clientFactory;
 	
 	public LeftSide(ClientFactory clientFactory) {
 		initWidget(uiBinder.createAndBindUi(this));
-		button1.setText("Sort1");
-		button2.setText("Sort2");
+		button1.setText("SortingTable1");
+		button2.setText("SortingTable2");
 		this.clientFactory = clientFactory;
+		this.cellTree.setAnimationEnabled(true);
 	}
 
 	@UiHandler("button1")
