@@ -12,22 +12,110 @@
 		}
 		
 		.northPanel {
-			background-color: #39F;
+			-moz-border-bottom-colors: none;
+			-moz-border-image: none;
+			-moz-border-left-colors: none;
+			-moz-border-right-colors: none;
+			-moz-border-top-colors: none;
+			background-color: #627AAD;
+			border-color: #1D4088 #1D4088 -moz-use-text-color;
+			border-style: solid solid none;
+			border-width: 1px 1px 0;
+			height: 30px;
+			/* margin-left: 180px; */
+			color: #FFFFFF;
+			display: inline-block;
+			font-weight: bold;
 		}
 		
-		.southPanel {
-			background-color: #99C;
+		.title {
+			color: #FFFFFF;
+			font-size: 20pt;
+			font-weight: bold;
+			text-shadow: #ddd 3px 3px 1px;
+			margin: 0;
+			padding: 0 0 0 4px;
 		}
 		
-		.centerPanel {
-			background-color: #FFC;
+		.subtitle {
+			color: #FFFFFF;
+			font-size: 16pt;
+			margin: 0;
+			padding: 0 0 0 6px;
+		}
+		
+		.titleBar {
+			padding: 0 10px;
+			border-bottom: 1px solid #C3C3C3;
+		}
+		
+		.pushButton {
+			background-color: #6D86B7;
+			outline: medium none;
+			border-style: solid solid none;
+			border-width: 1px 1px 0;
+			padding: 5px 5px 5px 3px;			
+		}
+		
+		.menuButton {
+			background-color: #6D86B7;
+			outline: medium none;
+			border-style: solid solid none;
+			border-width: 1px 1px 0;
+			/* padding: 5px 5px 5px 3px; */						
+		}
+		
+		.rightHorizontalPanel {
+			margin-right: 5px;
 		}
 	</ui:style>
 
 	<g:DockLayoutPanel unit='EM'>
-		<g:north size='2'>
+		<g:north size='3'>
 			<g:FlowPanel styleName="{style.northPanel}">
-				<g:Label>This is the NORTH panel</g:Label>
+				<g:HTMLPanel styleName='{style.titleBar}'>
+					<table cellpadding='0' cellspacing='0' width='100%'>
+						<tr>
+							<td>
+								<table cellpadding='0' cellspacing='0'>
+									<tr>
+										<td style='line-height:0px'>
+											<!-- Logo Image. -->
+											&nbsp;
+										</td>
+										<td>
+											<!-- Title and subtitle. -->
+											<h2 class='{style.subtitle}'>
+												<ui:msg key='mainSubTitle'>eTest</ui:msg>
+											</h2>
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td align='right' valign='top'>
+								<table cellpadding='0' cellspacing='0'>
+									<tr>
+										<td valign='middle'>
+											<g:HorizontalPanel styleName="{style.rightHorizontalPanel}">
+												<g:MenuBar title="Account" ui:field="menuBar" animationEnabled="true" autoOpen="true">
+													<g:MenuItem text="Home" ui:field="btnHome"/>
+													<g:MenuItem text="Profile" ui:field="btnProfile"/>
+													<g:MenuItem text="Account" ui:field="btnAccount">
+														<g:MenuBar vertical="true">
+															<g:MenuItem text="Settings" ui:field="btnSettings"/>
+															<g:MenuItem text="Logout" ui:field="btnLogout"/>
+														</g:MenuBar>
+													</g:MenuItem>
+												</g:MenuBar>
+											</g:HorizontalPanel>
+										</td>
+									</tr>
+								</table>
+
+							</td>
+						</tr>
+					</table>
+				</g:HTMLPanel>
 			</g:FlowPanel>
 		</g:north>
 		<g:west size='15'>
