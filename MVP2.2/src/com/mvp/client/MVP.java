@@ -42,6 +42,8 @@ public class MVP implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 
+		//SimpleGinjector ginjector = GWT.create(SimpleGinjector.class);
+		
 		ClientFactory clientFactory = GWT.create(ClientFactory.class);
 		EventBus eventBus = clientFactory.getEventBus();
 		PlaceController placeController = clientFactory.getPlaceController();
