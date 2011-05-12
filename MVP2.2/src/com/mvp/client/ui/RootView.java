@@ -3,6 +3,8 @@ package com.mvp.client.ui;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.storage.client.Storage;
+import com.google.gwt.storage.client.StorageMap;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
@@ -67,6 +69,21 @@ public class RootView extends Composite implements MainView {
 		btnProfile.setCommand(cmdBtnProfile);
 		btnSettings.setCommand(cmdBtnSettings);
 		btnLogout.setCommand(cmdBtnLogout);
+		
+		// check to see if local storage API can be used!
+		// TODO: How to make application work offline!!!?!?!?
+		if (Storage.isSupported()) {
+			Window.alert("This browser supports local storage");
+			
+			// OK if suport then get somethign from there
+			
+			Storage localStorage = Storage.getLocalStorageIfSupported();
+			localStorage.setItem("myitem", "offline value");
+			
+		}
+		else {
+			Window.alert("No loca storage support");
+		}
 
 	}
 
