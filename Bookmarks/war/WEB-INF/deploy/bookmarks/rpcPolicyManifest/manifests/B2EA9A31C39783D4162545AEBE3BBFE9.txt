@@ -1,2 +1,0 @@
-serviceClass: de.hdawg.wci.portlets.bookmarks.client.BookmarkService
-path: 5520FE9FDFEBBAB4F04957C27A9180EA.gwt.rpc
