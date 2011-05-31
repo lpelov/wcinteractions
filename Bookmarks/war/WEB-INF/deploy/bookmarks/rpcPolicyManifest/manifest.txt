@@ -1,0 +1,3 @@
+# Module bookmarks
+# RPC service class, partial path of RPC policy file
+de.hdawg.wci.portlets.bookmarks.client.BookmarkService, 5520FE9FDFEBBAB4F04957C27A9180EA.gwt.rpc
