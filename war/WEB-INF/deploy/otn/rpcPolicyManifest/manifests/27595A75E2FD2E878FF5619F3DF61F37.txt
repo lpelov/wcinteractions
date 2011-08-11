@@ -1,2 +1,0 @@
-serviceClass: com.oracle.gwt.client.GreetingService
-path: E4521F31F251E24B140020375656C375.gwt.rpc

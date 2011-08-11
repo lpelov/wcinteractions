@@ -1,3 +1,0 @@
-# Module otn
-# RPC service class, partial path of RPC policy file
-com.oracle.gwt.client.GreetingService, E4521F31F251E24B140020375656C375.gwt.rpc
