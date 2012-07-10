@@ -11,31 +11,36 @@ import oracle.stellent.ridc.protocol.ServiceResponse;
 import oracle.stellent.ridc.protocol.jaxws.JaxWSClient;
 import oracle.stellent.ridc.protocol.jaxws.JaxWSClientConfig;
 
+/**
+ * L.Pelov
+ * Simple code access the UCM Native Web Service.
+ */
 public class CallRidc {
     private String ridcName = "Ridc UCM";
-    
-    public CallRidc() {        
+
+    public CallRidc() {
     }
 
     private void createConnection() throws IdcClientException {
-        
+
         // create the manager
         IdcClientManager manager = new IdcClientManager();
 
         // build a client that will communicate using the JAXWS protocol
-        JaxWSClient idcClient = (JaxWSClient)manager.createClient("http://l6899022.sdst.sbaintern.de:16200/idcnativews");
-        
+        JaxWSClient idcClient =
+            (JaxWSClient)manager.createClient("http://127.0.0.1:16200/idcnativews");
+
         // get the config object and set properties
-        idcClient.getConfig ().setSocketTimeout (30000); // 30 seconds
-        idcClient.getConfig ().setConnectionSize (20);   // 20 connections
+        idcClient.getConfig().setSocketTimeout(30000); // 30 seconds
+        idcClient.getConfig().setConnectionSize(20); // 20 connections
 
         JaxWSClientConfig jaxwsConfig = idcClient.getConfig();
 
         // set the property
         jaxwsConfig.setServerInstanceName("/cs/");
-        
+
         // create the user context
-        IdcContext idcContext = new IdcContext ("weblogic", "Weblogic1");
+        IdcContext idcContext = new IdcContext("weblogic", "welcome1");
 
         // build the search request binder
         DataBinder binder = idcClient.createBinder();
@@ -47,19 +52,16 @@ public class CallRidc {
         ServiceResponse response = idcClient.sendRequest(idcContext, binder);
         DataBinder responseBinder = response.getResponseAsBinder();
 
-        DataResultSet resultSet = responseBinder.getResultSet ("SearchResults");
+        DataResultSet resultSet = responseBinder.getResultSet("SearchResults");
 
         // loop over the results
-        for (DataObject dataObject : resultSet.getRows ()) {
-            System.out.println ("Title is: " + dataObject.get ("dDocTitle"));
-            System.out.println ("Author is: " + dataObject.get ("dDocAuthor"));
+        for (DataObject dataObject : resultSet.getRows()) {
+            System.out.println("Title is: " + dataObject.get("dDocTitle"));
+            System.out.println("Author is: " + dataObject.get("dDocAuthor"));
         }
 
-
-
     }
-    
-    
+
     public String getRidcName() {
         try {
             createConnection();
