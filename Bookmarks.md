@@ -1,0 +1,19 @@
+#Bookmarks Portlet
+
+# Introduction #
+
+Bookmarks portlet is donated by H. Wesselmann and is created to work with Oracle WebCenter Interaction Portal - WCI (ex-BEA ALUI Portal).
+
+
+# Details #
+
+This project is in development status and is not finish at the moment. The portlet will have the following features:
+
+  * Add WCI community links
+  * Add WCI Page links
+  * Add Web links
+
+The portlet has embedded Derby database when all links will be saved.
+
+Status:
+  * UI is almost finished, we do need to attach now WCI EDK Functionality to be able to select communities and pages
