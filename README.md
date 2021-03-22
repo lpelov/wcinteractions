@@ -1,4 +1,4 @@
-!! THIS REPOSITORY IS NO LONGER SUPPORTED.
+# THIS REPOSITORY IS NO LONGER SUPPORTED!
 
 # wcinteractions
 Automatically exported from code.google.com/p/wcinteractions
